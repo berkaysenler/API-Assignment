@@ -11,14 +11,16 @@ import retrofit2.http.POST
 import retrofit2.http.Path
 
 interface ApiService {
+    // Authentication endpoint - POST request with location path parameter and login credentials
     @POST("{location}/auth")
     suspend fun login(
-        @Path("location") location: String,
-        @Body loginRequest: LoginRequest
+        @Path("location") location: String, // Dynamic location (footscray/sydney/ort)
+        @Body loginRequest: LoginRequest   // Username and password in request body
     ): Response<LoginResponse>
 
+    // Dashboard endpoint - GET request with keypass path parameter
     @GET("dashboard/{keypass}")
     suspend fun getDashboard(
-        @Path("keypass") keypass: String
+        @Path("keypass") keypass: String   // Keypass received from successful login
     ): Response<DashboardResponse>
 }

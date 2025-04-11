@@ -2,9 +2,7 @@
 package com.example.assignmentlast.data.models
 
 data class DashboardResponse(
-//    val entities: List<Entity>,
-//    val entityTotal: Int
-
-    val entities: List<Map<String, Any>>,
-    val entityTotal: Int
+    // List of entities returned by the API
+    val entities: List<Map<String, Any>>,  // Dynamic entity structure using Map
+    val entityTotal: Int   // Total number of entities
 )

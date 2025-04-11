@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.assignmentlast.databinding.ActivityDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint
 
+// Enable Hilt dependency injection
 @AndroidEntryPoint
 class DetailsActivity : AppCompatActivity() {
 
@@ -26,7 +27,9 @@ class DetailsActivity : AppCompatActivity() {
         loadEntityDetails()
     }
 
+    // Main method to load and display entity details
     private fun loadEntityDetails() {
+        // Get entity from intent extras
         @Suppress("UNCHECKED_CAST")
         val entity = intent.getSerializableExtra("entity") as? HashMap<String, Any> ?: return
 
@@ -152,6 +155,7 @@ class DetailsActivity : AppCompatActivity() {
         return result
     }
 
+    // Find status fields for the entity
     private fun findStatusFields(entity: Map<String, Any>): List<String> {
         val result = mutableListOf<String>()
 
@@ -183,6 +187,7 @@ class DetailsActivity : AppCompatActivity() {
         return result.take(2)
     }
 
+    // Find description field for the entity
     private fun findDescriptionField(entity: Map<String, Any>): String? {
         // Look for description field
         return entity.keys.firstOrNull {
@@ -192,12 +197,14 @@ class DetailsActivity : AppCompatActivity() {
         }
     }
 
+    // Format field name for display
     private fun formatFieldName(field: String): String {
         return field.replaceFirstChar { it.uppercase() }
             .replace(Regex("([a-z])([A-Z])"), "$1 $2")
             .replace("_", " ")
     }
 
+    // Create a layout for status fields
     private fun createStatusLayout(field: String, value: String): LinearLayout {
         val layout = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
@@ -257,6 +264,7 @@ class DetailsActivity : AppCompatActivity() {
         return layout
     }
 
+    // Get appropriate colors for status values
     private fun getStatusColors(field: String, value: String): Pair<String, String> {
         // Default colors
         var bgColor = "#E3F2FD" // Light blue
@@ -281,6 +289,7 @@ class DetailsActivity : AppCompatActivity() {
         return Pair(bgColor, textColor)
     }
 
+    // Helper method to add a label and value to the container
     private fun addLabelAndValue(
         label: String,
         value: String,
@@ -317,6 +326,7 @@ class DetailsActivity : AppCompatActivity() {
         binding.container.addView(valueView)
     }
 
+    // Convert dp to pixels
     private fun dpToPx(dp: Int): Int {
         val density = resources.displayMetrics.density
         return (dp * density).toInt()

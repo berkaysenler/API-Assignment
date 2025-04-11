@@ -11,17 +11,21 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+// Hilt annotation for ViewModel injection
 @HiltViewModel
 class DashboardViewModel @Inject constructor(
-    private val repository: AppRepository
+    private val repository: AppRepository  // Injected repository
 ) : ViewModel() {
 
+    // LiveData for entity list with success/failure handling
     private val _entities = MutableLiveData<Result<List<Entity>>>()
     val entities: LiveData<Result<List<Entity>>> = _entities
 
+    // LiveData for loading state
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
+    // Function to fetch dashboard data from repository
     fun fetchDashboard(keypass: String) {
         viewModelScope.launch {
             _isLoading.value = true

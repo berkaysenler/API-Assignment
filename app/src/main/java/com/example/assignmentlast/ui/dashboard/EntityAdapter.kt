@@ -10,9 +10,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.assignmentlast.data.models.Entity
 import com.example.assignmentlast.databinding.ItemEntityBinding
 
+
+// RecyclerView adapter for displaying entities in the dashboard
+// Uses ListAdapter for efficient updates with DiffUtil
 class EntityAdapter(private val onItemClick: (Entity) -> Unit) :
     ListAdapter<Entity, EntityAdapter.EntityViewHolder>(EntityDiffCallback()) {
 
+    // Create new ViewHolders
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EntityViewHolder {
         val binding = ItemEntityBinding.inflate(
             LayoutInflater.from(parent.context),
@@ -22,13 +26,16 @@ class EntityAdapter(private val onItemClick: (Entity) -> Unit) :
         return EntityViewHolder(binding)
     }
 
+    // Bind data to ViewHolder
     override fun onBindViewHolder(holder: EntityViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 
+    // ViewHolder for entity items
     inner class EntityViewHolder(private val binding: ItemEntityBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
+        // Set up click listener in initialization
         init {
             binding.root.setOnClickListener {
                 val position = bindingAdapterPosition
@@ -38,8 +45,9 @@ class EntityAdapter(private val onItemClick: (Entity) -> Unit) :
             }
         }
 
+        // Bind entity data to views
         fun bind(entity: Map<String, Any>) {
-            // Determine primary field (name, species, title, etc.)
+            // Intelligently determine primary field (name, species, title, etc.)
             val primaryField = findPrimaryField(entity)
             binding.primaryText.text = entity[primaryField]?.toString() ?: "Unknown"
 
@@ -55,6 +63,7 @@ class EntityAdapter(private val onItemClick: (Entity) -> Unit) :
             // Determine status field (care level, conservation status, etc.)
             val statusField = findStatusField(entity)
             if (statusField != null && entity.containsKey(statusField)) {
+
                 val statusValue = entity[statusField].toString()
                 binding.statusBadge.text = statusValue
                 binding.statusBadge.visibility = ViewGroup.VISIBLE
@@ -68,12 +77,14 @@ class EntityAdapter(private val onItemClick: (Entity) -> Unit) :
             }
         }
 
+        // Helper method to find the most appropriate primary field
         private fun findPrimaryField(entity: Map<String, Any>): String {
             // Priority order for primary field
             val primaryFieldOptions = listOf(
                 "commonName", "species", "name", "title", "dishName"
             )
 
+            // Check for preferred fields first
             for (field in primaryFieldOptions) {
                 if (entity.containsKey(field)) {
                     return field
@@ -89,12 +100,14 @@ class EntityAdapter(private val onItemClick: (Entity) -> Unit) :
             } ?: entity.keys.first()
         }
 
+        // Helper method to find the most appropriate secondary field
         private fun findSecondaryField(entity: Map<String, Any>, primaryField: String): String? {
             // Priority order for secondary field
             val secondaryFieldOptions = listOf(
                 "scientificName", "author", "subtitle", "origin"
             )
 
+            // Check for preferred fields first
             for (field in secondaryFieldOptions) {
                 if (entity.containsKey(field) && field != primaryField) {
                     return field
@@ -110,12 +123,14 @@ class EntityAdapter(private val onItemClick: (Entity) -> Unit) :
             }
         }
 
+        // Helper method to find the most appropriate status field
         private fun findStatusField(entity: Map<String, Any>): String? {
             // Priority order for status field
             val statusFieldOptions = listOf(
                 "careLevel", "conservationStatus", "difficulty", "status", "priority"
             )
 
+            // Check for preferred fields first
             for (field in statusFieldOptions) {
                 if (entity.containsKey(field)) {
                     return field
@@ -130,6 +145,7 @@ class EntityAdapter(private val onItemClick: (Entity) -> Unit) :
             }
         }
 
+        // Determine appropriate colors based on status value
         private fun getStatusColors(statusField: String, statusValue: String): Pair<String, String> {
             // Default colors
             var bgColor = "#E3F2FD" // Light blue
@@ -155,6 +171,7 @@ class EntityAdapter(private val onItemClick: (Entity) -> Unit) :
         }
     }
 
+    // DiffUtil callback for efficient list updates
     class EntityDiffCallback : DiffUtil.ItemCallback<Entity>() {
         override fun areItemsTheSame(oldItem: Entity, newItem: Entity): Boolean {
             return oldItem.toString() == newItem.toString()

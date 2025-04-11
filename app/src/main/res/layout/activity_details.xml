@@ -23,31 +23,33 @@
         android:background="#4CAF50"
         android:elevation="4dp">
 
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:layout_height="match_parent">
 
+            <!-- Back Button -->
             <ImageButton
                 android:id="@+id/backButton"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:padding="12dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="Back"
                 android:src="@android:drawable/ic_menu_revert"
+                android:layout_gravity="start|center_vertical"
                 app:tint="#FFFFFF" />
 
+            <!-- Title -->
             <TextView
                 android:id="@+id/toolbarTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_gravity="center"
                 android:text="Details"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp"
                 android:textStyle="bold" />
-        </LinearLayout>
+        </FrameLayout>
     </androidx.appcompat.widget.Toolbar>
 
     <!-- Content -->

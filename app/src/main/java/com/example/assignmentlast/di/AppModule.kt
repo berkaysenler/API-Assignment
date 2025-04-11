@@ -12,14 +12,17 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
+// Hilt module for dependency injection
 @Module
-@InstallIn(SingletonComponent::class)
+@InstallIn(SingletonComponent::class)  // Available throughout app lifecycle
 object AppModule {
 
+    // Provides the base URL for the API
     @Provides
     @Singleton
     fun provideBaseUrl(): String = "https://nit3213api.onrender.com/"
 
+    // Provides a configured Retrofit instance
     @Provides
     @Singleton
     fun provideRetrofit(baseUrl: String): Retrofit {
@@ -29,12 +32,14 @@ object AppModule {
             .build()
     }
 
+    // Provides the API service implementation
     @Provides
     @Singleton
     fun provideApiService(retrofit: Retrofit): ApiService {
         return retrofit.create(ApiService::class.java)
     }
 
+    // Provides the repository implementation
     @Provides
     @Singleton
     fun provideAppRepository(apiService: ApiService): AppRepository {

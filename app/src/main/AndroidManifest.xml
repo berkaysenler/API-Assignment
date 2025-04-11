@@ -2,8 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.assignmentlast">
 
+    <!-- Permission required for API communication -->
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <!-- Custom Application class for Hilt initialization -->
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -13,6 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <!-- Login Activity - Entry point of the application -->
         <activity
             android:name=".ui.login.LoginActivity"
             android:exported="true">
@@ -22,10 +25,12 @@
             </intent-filter>
         </activity>
 
+        <!-- Dashboard Activity - Shows list of entities -->
         <activity
             android:name=".ui.dashboard.DashboardActivity"
             android:exported="false" />
 
+        <!-- Details Activity - Shows detailed information about an entity -->
         <activity
             android:name=".ui.details.DetailsActivity"
             android:exported="false" />

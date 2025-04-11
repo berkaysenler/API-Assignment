@@ -2,5 +2,5 @@
 package com.example.assignmentlast.data.models
 
 data class LoginResponse(
-    val keypass: String
+    val keypass: String   // Token received after successful authentication
 )

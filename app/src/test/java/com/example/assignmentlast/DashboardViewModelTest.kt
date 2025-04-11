@@ -20,33 +20,33 @@ import org.mockito.Mockito.`when`
 import org.mockito.junit.MockitoJUnitRunner
 
 @ExperimentalCoroutinesApi
-@RunWith(MockitoJUnitRunner::class)
+@RunWith(MockitoJUnitRunner::class)  // Use Mockito for mocking
 class DashboardViewModelTest {
 
     @get:Rule
-    val instantTaskExecutorRule = InstantTaskExecutorRule()
+    val instantTaskExecutorRule = InstantTaskExecutorRule()  // Rule for testing LiveData
 
-    private val testDispatcher = StandardTestDispatcher()
+    private val testDispatcher = StandardTestDispatcher()  // Test dispatcher for coroutines
 
     @Mock
-    private lateinit var repository: AppRepository
+    private lateinit var repository: AppRepository  // Mock repository
 
     private lateinit var viewModel: DashboardViewModel
 
     @Before
     fun setup() {
-        Dispatchers.setMain(testDispatcher)
-        viewModel = DashboardViewModel(repository)
+        Dispatchers.setMain(testDispatcher)  // Set test dispatcher for main thread
+        viewModel = DashboardViewModel(repository)  // Initialize ViewModel with mock repository
     }
 
     @After
     fun tearDown() {
-        Dispatchers.resetMain()
+        Dispatchers.resetMain()  // Reset main dispatcher after tests
     }
 
     @Test
     fun `fetchDashboard success should update live data`() = runTest {
-        // Given
+        // Given - Set up test data and mock behavior
         val entities = listOf(
             mapOf("name" to "Property 1", "scientificName" to "Property 2", "description" to "Description 1"),
             mapOf("name" to "Property 3", "scientificName" to "Property 4", "description" to "Description 2")
@@ -54,11 +54,11 @@ class DashboardViewModelTest {
         `when`(repository.getDashboard("keypass"))
             .thenReturn(Result.success(entities))
 
-        // When
+        // When - Call the method being tested
         viewModel.fetchDashboard("keypass")
         testDispatcher.scheduler.advanceUntilIdle() // Wait for coroutines to complete
 
-        // Then
+        // Then - Verify the expected outcome
         val result = viewModel.entities.value
         assert(result != null)
         assert(result!!.isSuccess)
@@ -67,16 +67,16 @@ class DashboardViewModelTest {
 
     @Test
     fun `fetchDashboard failure should update live data with error`() = runTest {
-        // Given
+        // Given - Set up test data and mock behavior for failure case
         val exception = Exception("Network error")
         `when`(repository.getDashboard("keypass"))
             .thenReturn(Result.failure(exception))
 
-        // When
+        // When - Call the method being tested
         viewModel.fetchDashboard("keypass")
         testDispatcher.scheduler.advanceUntilIdle() // Wait for coroutines to complete
 
-        // Then
+        // Then - Verify the expected outcome
         val result = viewModel.entities.value
         assert(result != null)
         assert(result!!.isFailure)
