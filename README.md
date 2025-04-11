@@ -25,6 +25,16 @@ The application integrates with the 'vu-nit3213-api' at https://nit3213api.onren
 
 ### Key Components
 
+### Dependencies Used
+
+- Retrofit2 (networking)
+- Gson (JSON parsing)
+- Hilt (DI)
+- Coroutines (async tasks)
+- ViewModel + LiveData (architecture)
+- RecyclerView & CardView (UI components)
+- JUnit + Mockito (for testing)
+
 #### Data Layer
 - **ApiService**: Interface defining API endpoints using Retrofit
 - **AppRepository**: Repository implementation handling data operations
