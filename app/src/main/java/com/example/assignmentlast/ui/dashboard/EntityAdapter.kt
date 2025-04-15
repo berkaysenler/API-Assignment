@@ -2,11 +2,14 @@ package com.example.assignmentlast.ui.dashboard
 
 import android.annotation.SuppressLint
 import android.graphics.Color
+import android.graphics.drawable.GradientDrawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.assignmentlast.R
 import com.example.assignmentlast.data.models.Entity
 import com.example.assignmentlast.databinding.ItemEntityBinding
 
@@ -70,7 +73,15 @@ class EntityAdapter(private val onItemClick: (Entity) -> Unit) :
 
                 // Set badge color based on status value
                 val (bgColor, textColor) = getStatusColors(statusField, statusValue)
-                binding.statusBadge.setBackgroundColor(Color.parseColor(bgColor))
+
+                // Safely get and mutate the background drawable
+                val backgroundDrawable = binding.statusBadge.background
+                if (backgroundDrawable is GradientDrawable) {
+                    backgroundDrawable.setColor(Color.parseColor(bgColor))
+                    binding.statusBadge.background = backgroundDrawable
+                }
+
+                // Set text color
                 binding.statusBadge.setTextColor(Color.parseColor(textColor))
             } else {
                 binding.statusBadge.visibility = ViewGroup.GONE

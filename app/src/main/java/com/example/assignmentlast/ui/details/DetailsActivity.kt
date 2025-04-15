@@ -2,10 +2,13 @@ package com.example.assignmentlast.ui.details
 
 import android.graphics.Color
 import android.graphics.Typeface
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import com.example.assignmentlast.R
 import com.example.assignmentlast.databinding.ActivityDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -236,7 +239,14 @@ class DetailsActivity : AppCompatActivity() {
                 textSize = 14f
                 setTextColor(Color.parseColor(textColor))
                 setPadding(dpToPx(16), dpToPx(8), dpToPx(16), dpToPx(8))
-                setBackgroundColor(Color.parseColor(bgColor))
+
+                // Load badge_background and change its color while keeping radius
+                val drawable = ContextCompat.getDrawable(this@DetailsActivity, R.drawable.badge_background)?.mutate()
+                if (drawable is GradientDrawable) {
+                    drawable.setColor(Color.parseColor(bgColor))
+                    background = drawable
+                }
+
                 layoutParams = LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT
