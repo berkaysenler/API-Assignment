@@ -5,11 +5,9 @@ import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.assignmentlast.R
 import com.example.assignmentlast.data.models.Entity
 import com.example.assignmentlast.databinding.ItemEntityBinding
 

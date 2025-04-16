@@ -1,6 +1,5 @@
 package com.example.assignmentlast
 
-import com.example.assignmentlast.data.models.Entity
 import com.example.assignmentlast.data.repository.AppRepository
 import com.example.assignmentlast.ui.dashboard.DashboardViewModel
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule

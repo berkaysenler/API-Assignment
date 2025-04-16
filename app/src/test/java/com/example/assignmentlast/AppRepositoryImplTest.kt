@@ -2,7 +2,6 @@ package com.example.assignmentlast
 
 import com.example.assignmentlast.data.api.ApiService
 import com.example.assignmentlast.data.models.DashboardResponse
-import com.example.assignmentlast.data.models.Entity
 import com.example.assignmentlast.data.models.LoginRequest
 import com.example.assignmentlast.data.models.LoginResponse
 import com.example.assignmentlast.data.repository.AppRepositoryImpl

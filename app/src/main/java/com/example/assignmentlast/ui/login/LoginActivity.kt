@@ -7,7 +7,6 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.example.assignmentlast.R
 import com.example.assignmentlast.databinding.ActivityLoginBinding
 import com.example.assignmentlast.ui.dashboard.DashboardActivity
 import dagger.hilt.android.AndroidEntryPoint

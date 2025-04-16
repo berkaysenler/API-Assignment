@@ -7,7 +7,6 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.assignmentlast.data.models.Entity
 import com.example.assignmentlast.databinding.ActivityDashboardBinding
 import com.example.assignmentlast.ui.details.DetailsActivity
 import com.example.assignmentlast.ui.login.LoginActivity

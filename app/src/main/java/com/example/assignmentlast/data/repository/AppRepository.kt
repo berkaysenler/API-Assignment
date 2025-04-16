@@ -2,11 +2,9 @@
 package com.example.assignmentlast.data.repository
 
 import com.example.assignmentlast.data.api.ApiService
-import com.example.assignmentlast.data.models.DashboardResponse
 import com.example.assignmentlast.data.models.Entity
 import com.example.assignmentlast.data.models.LoginRequest
-import com.example.assignmentlast.data.models.LoginResponse
-import retrofit2.Response
+
 import javax.inject.Inject
 
 // Repository interface defining data operations
